@@ -50,11 +50,9 @@ class WistiaApi
 	public function getVideoStats($id)
 	{
 		if(!isset($this->cache['videoStats'.$id])){
-			$params = array();
-
 			$this->cache['videoStats'.$id] = $this->sendRequest('medias/'.$id.'/stats');
 		}
-		return $this->cache['videoStats'.$projectId];
+		return $this->cache['videoStats'.$id];
 	}
 	
 	private function sendRequest($module,$params=null)
