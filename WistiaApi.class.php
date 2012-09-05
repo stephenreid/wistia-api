@@ -25,8 +25,35 @@ class WistiaApi
 	public function __construct($apiKey = null)
 	{
 		if($apiKey){
+			$this->cache = array();
 			$this->apiKey = $apiKey;
 		}
+	}
+	/**
+	 * accountRead
+	 * Gets the account as a stdObject
+	 * Properties id,name,url
+	 * @return stdClass account
+	 */
+	public function accountRead()
+	{
+		if(!$this->cache['account']){
+			$this->cache['account'] = $this->sendRequest('account');
+		}
+		return $this->cache['account'];
+	}
+	/**
+	 * eventRead
+	 * gets the details from any given event
+	 * @param string $key
+	 * @return stdClass event
+	 */
+	public function eventRead($key)
+	{
+		if(!$this->cache['events'][$key]){
+			$this->cache['events'][$key] = $this->sendRequest('stats/events/'.$key);
+		}
+		return $this->cache['events'][$key];
 	}
 	/**
 	 * projectCreate
@@ -159,5 +186,8 @@ class WistiaApi
 		$result = json_decode($result);
 		return $result;	
 	}
+}
+class WistiaException extends Exception{
+	
 }
 
