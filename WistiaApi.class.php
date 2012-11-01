@@ -190,7 +190,7 @@ class WistiaApi
 	 * @param array $params
 	 * @return mixed array/stdobject (from json_decode)
 	 */
-	private function sendRequest($module, $params=null)
+	protected function sendRequest($module, $params=null)
 	{
 		//build our url
 		$url = self::WISTIA_BASE_URL.$module.'.'.$this->format;
@@ -211,12 +211,14 @@ class WistiaApi
 		$result = json_decode($result);
 		return $result;	
 	}
-	private function __send($url, $params)
+	protected function __send($url)
 	{
+		$username = 'api';
+
 		$ch = curl_init();
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
 		curl_setopt($ch, CURLOPT_URL, $url);
-		curl_setopt($ch, CURLOPT_USERPWD, 'api'.':'.$this->apiKey);
+		curl_setopt($ch, CURLOPT_USERPWD, $username .':'.$this->apiKey);
 		
 		$result = curl_exec($ch);
 		curl_close($ch);
