@@ -47,6 +47,20 @@ class WistiaApi
 		return $this->cache['account'];
 	}
 	/**
+	 * accountStats
+	 * Get some overall statistics for the account
+	 * @since 12/13/2012
+	 * @return stdClass accountStat
+	 */
+	public function accountStats()
+	{
+		if(!isset($this->cache['accountStats'])){
+			$this->cache['accountStats'] = $this->sendRequest('stats/account');
+		}
+		return 	$this->cache['accountStats'] = $this->sendRequest('stats/account');
+		
+	}
+	/**
 	 * eventRead
 	 * gets the details from any given event
 	 * @param string $key
@@ -105,7 +119,7 @@ class WistiaApi
 		}
 		//empty our cache
 		$this->cache['projects']=null;
-		return $this->sendRequest('projects/'.$id,$projectData);	
+		return $this->sendRequest('projects/'.$id,$projectData);
 	}
 	/**
 	 * mediaList
@@ -201,7 +215,7 @@ class WistiaApi
 		}
 		if($this->debug){
 			echo 'Sending Request: '.$url;
-		}	
+		}
 	
 		$result = $this->__send($url,$params);
 
@@ -209,7 +223,7 @@ class WistiaApi
 			echo 'Received: '.$result;
 		}
 		$result = json_decode($result);
-		return $result;	
+		return $result;
 	}
 	protected function __send($url)
 	{
