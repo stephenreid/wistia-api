@@ -182,20 +182,19 @@ class WistiaApi
 	 */
 	public function mediaUpdate($media = null)
 	{
-		if(!$media){
-			return false;
-		}
-		$id = $media->id;
-		$params = array();
-		if($media->name != $this->cache['media']['id']->name){
-			$params['name']=$media->name;
-		}
-		if($media->description != $this->cache['media']['id']->description){
-			$params['descriptions']=$media->descriptions;
-		}
-		return $this->cache['media'][$id] = $this->sendRequest('medias/'.$id,$params);
-		
-		
+    		if(!$media){
+        		return false;
+    		}
+    		$id = $media->hashed_id;
+    		$params = array();
+    		if($media->name != $this->cache['media'][$id]->name){
+        		$params['name']=$media->name;
+    		}
+    		if($media->description != $this->cache['media'][$id]->description){
+        		$params['descriptions']=$media->descriptions;
+    		}
+    		return $this->cache['media'][$id] = $this->sendRequest('medias/'.$id,$params);
+
 	}
 	/**
 	 * sendRequest
