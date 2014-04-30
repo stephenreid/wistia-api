@@ -4,8 +4,6 @@ wistia-api
 A PHP Class for Wistia (Data) API Usage
 I'm only using the read only functions right now, so that is what i have focused on.
 
-### Additional Doc
-http://dev-forum.wistia.com/discussion/6/php-libraries
 
 ### License
 Copyright (c) 2012 Stephen Reid
